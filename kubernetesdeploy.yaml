@@ -3,20 +3,20 @@ kind: Deployment
 metadata:
   name: bankapp-deploy
   labels:
-    app: bankapp-app
+    app: financial-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: bankapp-app
+      app: financial-app
   template:
     metadata:
       labels:
-        app: bankapp-app
+        app: financial-app
     spec:
       containers:
       - name: bankapp-container
-        image: paragv14/bankapp-app
+        image: paragv14/financial-app
         ports:
         - containerPort: 8082
 ---
@@ -25,13 +25,14 @@ kind: Service
 metadata:
   name: bankapp-np-service
   labels:
-    app: bankapp-app
+    app: financial-app
 spec:
   selector:
-    app: bankapp-app
+    app: financial-app
 
   type: NodePort
   ports:
   - nodePort: 31030  
     port: 8082
     targetPort: 8082
+
